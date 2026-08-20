@@ -46,9 +46,7 @@ export const Projects = () => {
           <h2>Featured Work</h2>
         </div>
 
-        <button className="link-button" type="button">
-          View All Projects
-        </button>
+      
       </div>
 
       <div className="projects-grid">

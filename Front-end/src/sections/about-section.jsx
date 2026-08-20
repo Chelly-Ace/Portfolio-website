@@ -10,11 +10,11 @@ export const About = () => {
     <section className="hero-section" id="about" data-reveal>
       <div className="hero-copy" data-reveal>
         <div className="eyebrow-row">
-          <span className="eyebrow-text">Portfolio</span>
+          <span className="eyebrow-text">Open for Freelance!</span>
         </div>
 
         <h1>
-          Data
+          Aspiring Data
           <span className="hero-highlight">Analyst</span>
         </h1>
 
@@ -26,7 +26,7 @@ export const About = () => {
 
         <div className="hero-actions">
           <button className="primary-button" type="button">
-            View Projects
+            View CV
           </button>
           <button className="secondary-button" type="button">
             Download CV
@@ -38,7 +38,7 @@ export const About = () => {
         <div className="portrait-glow" />
         <div className="portrait-frame">
           <img
-            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
+            src="src\assets\2x2.png"
             alt="Professional portrait"
           />
         </div>

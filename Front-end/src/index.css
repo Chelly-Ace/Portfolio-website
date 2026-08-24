@@ -162,6 +162,23 @@ img {
   z-index: 110;
 }
 
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--secondary-button-border);
+  color: var(--nav-text);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translateY(36px) scale(0.985);

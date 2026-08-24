@@ -420,9 +420,21 @@ img {
   gap: 26px;
   width: min(90%, 1100px);
   margin: 0 auto;
+  align-items: stretch;
+}
+
+.project-card-link {
+  display: flex;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 
 .work-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(17, 24, 39, 0.06);
   border-radius: 22px;
@@ -480,6 +492,9 @@ img {
 }
 
 .project-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: 18px 22px 24px;
 }
 
@@ -513,16 +528,11 @@ img {
   font-size: 0.97rem;
 }
 
-.project-card-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-}
-
 .project-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-top: auto;
   color: var(--card-ink);
   font-weight: 700;
 }

@@ -10,9 +10,9 @@ export const Contact = () => {
         </p>
 
         <ul className="contact-info">
-          <li>Email: hello@yourdomain.com</li>
-          <li>Phone: +1 (555) 123-4567</li>
-          <li>Location: San Francisco, CA</li>
+          <li>Email: devillalbert@gmail.com</li>
+          <li>Phone: +639530725888 </li>
+          <li>Location: Makati City, Metro Manila</li>
         </ul>
       </div>
 

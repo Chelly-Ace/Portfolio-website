@@ -1,63 +1,19 @@
-import { useEffect } from "react";
-import { Navbar } from "./layouts/Navbar";
-import { About } from "./sections/about-section";
-import { Projects } from "./sections/projects-section";
-import { Experience } from "./sections/experience-section";
-import { Skills } from "./sections/skills-section";
-import { Contact } from "./sections/contacts-section";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MediaBuyingProject from "./pages/MediaBuyingProject";
+import BankingAppProject from "./pages/BankingAppProject";
+import CorporateBrandingProject from "./pages/CorporateBrandingProject";
+import AnalyticsDashboardProject from "./pages/AnalyticsDashboardProject";
 
 function App() {
-  useEffect(() => {
-    const revealItems = document.querySelectorAll("[data-reveal]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    revealItems.forEach((item) => observer.observe(item));
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const updateScrollShift = () => {
-      const shift = window.scrollY * 0.08;
-      document.documentElement.style.setProperty("--scroll-shift", `${shift}px`);
-    };
-
-    updateScrollShift();
-    window.addEventListener("scroll", updateScrollShift, { passive: true });
-
-    return () => window.removeEventListener("scroll", updateScrollShift);
-  }, []);
-
   return (
-    <div className="page-shell">
-      <div className="topbar-wrap">
-        <Navbar />
-      </div>
-
-      <div className="page-frame">
-        <main>
-          <About />
-          <Projects />
-          <Experience />
-          <Skills />
-          <Contact />
-        </main>
-
-        <footer className="site-footer">
-          <span>© 2026 Adv. All rights reserved.</span>
-          <span>Crafted with passion and precision</span>
-        </footer>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/projects/media-buying" element={<MediaBuyingProject />} />
+      <Route path="/projects/banking-app" element={<BankingAppProject />} />
+      <Route path="/projects/corporate-branding" element={<CorporateBrandingProject />} />
+      <Route path="/projects/analytics-dashboard" element={<AnalyticsDashboardProject />} />
+    </Routes>
   );
 }
 

@@ -1,3 +1,5 @@
+import portraitImg from "../assets/2x2.png";
+
 const stats = [
   { value: "150+", label: "Projects Completed" },
   { value: "50+", label: "Happy Clients" },
@@ -38,7 +40,7 @@ export const About = () => {
         <div className="portrait-glow" />
         <div className="portrait-frame">
           <img
-            src="src\assets\2x2.png"
+            src={portraitImg}
             alt="Professional portrait"
           />
         </div>

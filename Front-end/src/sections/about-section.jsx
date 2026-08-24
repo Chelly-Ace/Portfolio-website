@@ -1,4 +1,4 @@
-import portraitImg from "../assets/2x2.png";
+import portraitImg from "../assets/profile-image.jpg";
 
 const stats = [
   { value: "150+", label: "Projects Completed" },

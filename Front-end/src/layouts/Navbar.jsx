@@ -41,7 +41,10 @@ export const Navbar = () => {
 
   return (
     <header className="topbar">
-      <div className="brand-mark">ADV.</div>
+      <div className="brand-stack">
+        <div className="brand-mark">ADV.</div>
+        <div className="brand-subtitle">Albert De Villa</div>
+      </div>
 
       <nav className="main-nav" aria-label="Main navigation">
         {navLinks.map((link) => (
@@ -59,7 +62,7 @@ export const Navbar = () => {
           aria-pressed={isDark}
           aria-label="Toggle theme"
         >
-          {isDark ? "🌙" : "☀️"}
+          {isDark ? "Dark" : "Light"}
         </button>
 
         <button className="primary-button" type="button">

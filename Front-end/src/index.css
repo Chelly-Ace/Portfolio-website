@@ -31,6 +31,8 @@
   --muted-surface: rgba(23, 23, 23, 0.03);
   --card-sheen: rgba(255, 255, 255, 0.9);
   --input-bg: rgba(17, 17, 17, 0.02);
+  /* Header height used for anchor offset to avoid sticky header overlap */
+  --topbar-height: 25px;
 }
 
 html[data-theme="dark"] {
@@ -65,10 +67,46 @@ html[data-theme="dark"] .portrait-frame {
   background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-panel-alt) 100%);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
   border: 8px solid var(--border);
+  position: relative;
+  overflow: hidden;
 }
 
+/* subtle white overlay that appears on hover in dark mode to make the portrait look brighter */
+html[data-theme="dark"] .portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 40%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1);
+}
+
+/* brighten the glow slightly in dark mode when hovering the portrait area and add outside brightening */
+html[data-theme="dark"] .hero-visual:hover .portrait-glow,
+html[data-theme="dark"] .portrait-frame:hover ~ .portrait-glow {
+  background: radial-gradient(circle, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.08) 36%, rgba(255,255,255,0) 72%);
+  transform: scale(1.08);
+  filter: blur(18px);
+  opacity: 1;
+}
+
+/* on hover, show a minimal white light overlay, a subtle white rim, and an outside soft bright glow */
+html[data-theme="dark"] .portrait-frame:hover {
+  box-shadow: 0 48px 100px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(255,255,255,0.04), 0 0 48px rgba(255,255,255,0.03);
+}
+
+html[data-theme="dark"] .portrait-frame:hover::after {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* ensure the base glow in dark mode is subtle */
 html[data-theme="dark"] .portrait-glow {
   background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 36%, rgba(255,255,255,0) 72%);
+  opacity: 0.9;
 }
 
 html[data-theme="dark"] .work-card.rose .project-visual,
@@ -106,13 +144,121 @@ html[data-theme="dark"] .avatar {
 }
 
 html[data-theme="dark"] .skill-icon {
-  background: var(--muted-surface);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
+  /* Make the icon tile itself black while keeping the inner icon/text white for strong contrast */
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
 }
 
 html[data-theme="dark"] .project-visual img {
   box-shadow: 0 18px 32px rgba(0,0,0,0.5);
+}
+
+/* Logo: use the same hover fill effect as Light Mode but adapted for Dark Mode */
+html[data-theme="dark"] .brand-mark {
+  /* gradient that shows WHITE text by default, then fills BLACK on hover (swapped) */
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #ffffff 50%,
+    #000000 50%,
+    #000000 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  background-position: 100% 0 !important; /* default shows the white portion */
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  transition: background-position 0.8s ease !important;
+}
+
+html[data-theme="dark"] .brand-mark:hover,
+html[data-theme="dark"] .brand-mark:focus {
+  background-position: 0% 0 !important; /* animate fill to BLACK */
+  cursor: pointer;
+}
+
+/* Make the stat cards stand out in Dark Mode: visible border and subtle lighter interior */
+html[data-theme="dark"] .stat-item {
+  background: rgba(255, 255, 255, 0.03) !important; /* subtle inner panel */
+  border: 1px solid rgba(255, 255, 255, 0.12) !important; /* visible border */
+  border-radius: 18px !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6) inset;
+}
+
+/* Make experience section copy and stats pure white in dark mode for maximum readability */
+html[data-theme="dark"] .reality-copy p {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .reality-stats strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .reality-stats span {
+  color: #ffffff !important;
+}
+
+/* Make contact section copy and contact info white in dark mode */
+html[data-theme="dark"] .contact-copy p {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .contact-info li {
+  color: #ffffff !important;
+}
+
+/* Emphasize borders and labels for key UI elements in Dark Mode */
+html[data-theme="dark"] .theme-toggle {
+  border-color: rgba(255,255,255,0.18) !important;
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.02) !important;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.02);
+}
+
+html[data-theme="dark"] .eyebrow-text,
+html[data-theme="dark"] .mini-label {
+  color: #ffffff !important;
+  background: var(--muted-surface) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+html[data-theme="dark"] .hero-actions .primary-button {
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+/* Make the Download CV secondary button inverted (white background, black text) in Dark Mode */
+html[data-theme="dark"] .hero-actions .secondary-button {
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6) !important;
+}
+
+
+/* Footer text white in Dark Mode */
+html[data-theme="dark"] .site-footer {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .site-footer a {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .stat-item strong,
+html[data-theme="dark"] .stat-item span {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .projects-section .mini-label,
+html[data-theme="dark"] .skills-section .mini-label,
+html[data-theme="dark"] .contact-section .mini-label,
+html[data-theme="dark"] .reality-copy .mini-label {
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
 }
 
 /* Catch-all: replace any small colored accents with subdued white-on-black variants where appropriate */
@@ -124,12 +270,17 @@ html[data-theme="dark"] .freelance-badge {
   color: var(--text-primary);
 }
 
-* 
+* {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+html {
+  /* Offset anchor scrolling to account for the sticky header */
+  scroll-padding-top: var(--topbar-height);
 }
 
 body {
@@ -140,6 +291,11 @@ body {
     linear-gradient(180deg, var(--bg-page) 0%, var(--bg-page) 100%);
   color: var(--text-primary);
   transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Ensure section anchors are placed below the header when navigated to */
+section {
+  scroll-margin-top: calc(var(--topbar-height) + 2px);
 }
 
 a {
@@ -213,7 +369,7 @@ img {
   background: var(--nav-bg);
   border: none;
   border-radius: 0;
-  padding: 18px 32px;
+  padding: 12px 28px; /* reduced vertical padding to make header thinner */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -287,6 +443,21 @@ img {
 .brand-mark:hover {
   background-position: 0% 0;
   cursor: pointer;
+}
+
+/* Brand stack: wrap logo and subtitle */
+.brand-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center; /* center ADV. over subtitle */
+}
+.brand-subtitle {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--nav-text);
+  opacity: 0.9;
 }
 
 .main-nav {
@@ -487,6 +658,8 @@ img {
   background: radial-gradient(circle, rgba(120, 120, 120, 0.24) 0%, rgba(120, 120, 120, 0.08) 36%, rgba(255, 255, 255, 0) 72%);
   filter: blur(10px);
   animation: pulseGlow 6s ease-in-out infinite alternate;
+  transform-origin: center;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portrait-frame {
@@ -498,12 +671,21 @@ img {
   background: linear-gradient(180deg, #eaeaea 0%, #adadad 100%);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
   border: 8px solid var(--border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
 }
 
+/* Subtle, premium hover: lift + scale (no rotation), stronger shadow, and ring expansion */
 .portrait-frame:hover {
-  transform: scale(1.03) rotate(-1.5deg);
-  box-shadow: 0 38px 70px rgba(0, 0, 0, 0.18);
+  transform: translateY(-4px) scale(1.025);
+  box-shadow: 0 44px 88px rgba(0, 0, 0, 0.24);
+}
+
+/* Expand the glow/ring subtly when hovering the visual area (hovering the frame counts) */
+.hero-visual:hover .portrait-glow,
+.portrait-frame:focus-within ~ .portrait-glow {
+  transform: scale(1.04);
+  opacity: 1;
 }
 
 .portrait-frame img {
@@ -511,6 +693,12 @@ img {
   height: 100%;
   object-fit: cover;
   transform: scale(1.12);
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark-mode specific hover: slightly stronger interior shadow to read as "lifted" on dark backgrounds */
+html[data-theme="dark"] .portrait-frame:hover {
+  box-shadow: 0 48px 100px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes pulseGlow {

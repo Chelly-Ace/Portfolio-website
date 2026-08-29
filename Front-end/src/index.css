@@ -32,7 +32,12 @@
   --card-sheen: rgba(255, 255, 255, 0.9);
   --input-bg: rgba(17, 17, 17, 0.02);
   /* Header height used for anchor offset to avoid sticky header overlap */
-  --topbar-height: 25px;
+  --topbar-height: 2rem;
+  --header-breathing: -2rem;
+  --header-breathing-about: -3.3rem;
+  --header-breathing-experience: -4rem;
+  --header-breathing-skills: -3.3rem;
+  --header-breathing-contact: -3.3rem;
 }
 
 html[data-theme="dark"] {
@@ -63,6 +68,21 @@ html[data-theme="dark"] {
 }
 
 /* Dark-mode overrides for hard-coded colors to ensure only black & white are used */
+
+/* Section-specific scroll offsets (per-section breathing space under the sticky header)
+   Each section uses its own --header-breathing-<section> variable if present,
+   otherwise falls back to --header-breathing. Adjust these values as needed.
+
+   Example: to change the Contact breathing to 28px, add in :root:
+     --header-breathing-contact: 28px;
+*/
+#about { scroll-margin-top: calc(var(--topbar-height) + var(--header-breathing-about, var(--header-breathing))); }
+#projects { scroll-margin-top: calc(var(--topbar-height) + var(--header-breathing-projects, var(--header-breathing))); }
+#experience { scroll-margin-top: calc(var(--topbar-height) + var(--header-breathing-experience, var(--header-breathing))); }
+#skills { scroll-margin-top: calc(var(--topbar-height) + var(--header-breathing-skills, var(--header-breathing))); }
+#contact { scroll-margin-top: calc(var(--topbar-height) + var(--header-breathing-contact, var(--header-breathing))); }
+
+
 html[data-theme="dark"] .portrait-frame {
   background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-panel-alt) 100%);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
@@ -280,7 +300,6 @@ html {
 
 html {
   /* Offset anchor scrolling to account for the sticky header */
-  scroll-padding-top: var(--topbar-height);
 }
 
 body {
@@ -295,7 +314,8 @@ body {
 
 /* Ensure section anchors are placed below the header when navigated to */
 section {
-  scroll-margin-top: calc(var(--topbar-height) + 2px);
+  /* single source-of-truth offset: topbar height + breathing room (adjust --header-breathing as needed, 16–32px recommended) */
+  scroll-margin-top: calc(var(--topbar-height) + var(--header-breathing));
 }
 
 a {
@@ -756,6 +776,35 @@ html[data-theme="dark"] .portrait-frame:hover {
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 24px;
+}
+
+/* Centered variant: stack label above heading and center-align */
+.section-heading.centered {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.section-heading.centered .mini-label {
+  align-self: center;
+}
+.section-heading.centered h2 {
+  text-align: center;
+}
+
+/* Stronger, section-scoped override in case other layout rules interfere */
+.skills-section .section-heading.centered {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+.skills-section .section-heading.centered .mini-label {
+  display: inline-block !important;
+  margin: 0 auto !important;
+}
+.skills-section .section-heading.centered h2 {
+  text-align: center !important;
 }
 
 .heading-group {

@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { FaRegSun } from "react-icons/fa";
+import { FaRegMoon } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa6";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -56,13 +59,24 @@ export const Navbar = () => {
 
       <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <button
+          className="theme-toggle linkedin-button"
+          type="button"
+          title="LinkedIn"
+          onClick={() =>
+            window.open("https://www.linkedin.com/in/albert-de-villa-447032393/", "_blank")
+          }
+        >
+          <FaLinkedinIn />
+        </button>
+        
+        <button
           className="theme-toggle"
           type="button"
           onClick={handleToggle}
           aria-pressed={isDark}
           aria-label="Toggle theme"
         >
-          {isDark ? "Dark" : "Light"}
+          {isDark ? <FaRegMoon /> : <FaRegSun />}
         </button>
 
         <button className="primary-button" type="button">

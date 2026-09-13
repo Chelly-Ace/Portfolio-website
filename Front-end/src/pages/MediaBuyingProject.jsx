@@ -56,7 +56,9 @@ export default function MediaBuyingProject() {
       kicker="MEDIA BUYING ANALYTICS"
       title="Media Buying Analytics"
       subtitle="Multichannel Campaign Performance & Budget Optimization"
-      description="This analytics project reviewed campaign efficiency across paid media channels, highlighting performance gaps, cost inefficiencies, and opportunities to improve return on ad spend."
+      description="Analyzed a DTC fitness supplements brand spending 
+                  $1.6M monthly across Facebook, Google, and TikTok, with an overall ROAS of 0.86 versus the 1.2 target. The project focuses on identifying performance gaps and optimizing ad spend to support 40% revenue growth while maintaining profitability.
+"
       image={mediaBuyerLogo}
       kpis={kpis}
       platformRows={platformRows}

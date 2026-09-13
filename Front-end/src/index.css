@@ -35,9 +35,9 @@
   --topbar-height: 2rem;
   --header-breathing: -2rem;
   --header-breathing-about: -3.3rem;
-  --header-breathing-experience: -4rem;
+  --header-breathing-experience: -2rem;
   --header-breathing-skills: -3.3rem;
-  --header-breathing-contact: -3.3rem;
+  --header-breathing-contact: -2rem;
 }
 
 html[data-theme="dark"] {
@@ -298,9 +298,7 @@ html {
   scroll-behavior: smooth;
 }
 
-html {
-  /* Offset anchor scrolling to account for the sticky header */
-}
+
 
 body {
   margin: 0;
@@ -1520,5 +1518,387 @@ html[data-theme="dark"] .portrait-frame:hover {
 
   .portfolio-shell {
     padding-inline: 10px;
+  }
+}
+.typing-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 0.8em;
+  margin-left: 5px;
+  vertical-align: middle;
+  background-color: currentColor;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* LinkedIn hover effect - works in both Light and Dark Mode */
+.linkedin-button {
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.linkedin-button:hover,
+html[data-theme="dark"] .linkedin-button:hover {
+  color: #0a66c2 !important;
+  background-color: rgba(10, 102, 194, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   DASHBOARD PROJECT LAYOUT
+   ========================================= */
+
+.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-page);
+}
+
+/* =========================================
+   LEFT SIDEBAR
+   ========================================= */
+
+.dashboard-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 290px;
+  height: 100vh;
+  padding: 34px 24px 26px;
+  overflow-y: auto;
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  border-right: 1px solid var(--border);
+}
+
+.dashboard-sidebar-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* =========================================
+   PROJECT TITLE
+   ========================================= */
+
+.dashboard-sidebar-heading {
+  padding: 8px 12px 0;
+}
+
+.dashboard-sidebar-heading h2 {
+  max-width: 220px;
+  margin: 0;
+  color: var(--nav-text);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.035em;
+}
+.dashboard-sidebar-heading {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* =========================================
+   PROJECT NAVIGATION
+   ========================================= */
+
+.dashboard-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 48px;
+}
+
+.dashboard-navigation-label {
+  margin: 0 12px 16px;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.dashboard-nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--nav-text);
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dashboard-nav-item:hover {
+  background: var(--muted-surface);
+  transform: translateX(2px);
+}
+
+.dashboard-nav-item.active {
+  background: var(--muted-surface);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* =========================================
+   BOTTOM BACK LINK
+   ========================================= */
+
+.dashboard-sidebar-bottom {
+  display: flex;
+  align-items: flex-end;
+  padding: 24px 12px 0;
+}
+
+.dashboard-sidebar-bottom .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nav-text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dashboard-sidebar-bottom .back-link:hover {
+  color: var(--text-primary);
+  transform: translateX(-2px);
+}
+
+.back-link-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* =========================================
+   RIGHT CONTENT AREA
+   ========================================= */
+
+.dashboard-content {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-page);
+}
+
+.dashboard-content-inner {
+  width: 100%;
+  max-width: 1180px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 48px;
+}
+
+/* =========================================
+   INDIVIDUAL PAGE CONTENT
+   ========================================= */
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: dashboardPageFade 0.2s ease;
+}
+
+@keyframes dashboardPageFade {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.dashboard-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.dashboard-page-header h1 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.dashboard-page-header p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* =========================================
+   OVERVIEW PANEL
+   ========================================= */
+
+.overview-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.overview-panel .project-hero-image {
+  min-height: 420px;
+}
+
+/* =========================================
+   FINDINGS AND RECOMMENDATIONS
+   ========================================= */
+
+.findings-page-panel,
+.recommendations-page-panel {
+  min-height: 300px;
+}
+
+/* =========================================
+   TABLE RESPONSIVENESS
+   ========================================= */
+
+.project-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1000px) {
+  .dashboard-sidebar {
+    width: 250px;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .dashboard-content-inner {
+    padding: 36px;
+  }
+
+  .dashboard-nav-item {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 760px) {
+  .dashboard-layout {
+    display: block;
+  }
+
+  .dashboard-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 24px 20px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow: visible;
+  }
+
+  .dashboard-sidebar-heading {
+    padding: 0;
+  }
+
+  .dashboard-sidebar-heading h2 {
+    max-width: none;
+    font-size: 1.35rem;
+  }
+
+  .dashboard-navigation {
+    margin-top: 30px;
+  }
+
+  .dashboard-navigation-label {
+    margin-left: 0;
+  }
+
+  .dashboard-nav-item {
+    min-height: 44px;
+    padding: 11px 12px;
+  }
+
+  .dashboard-sidebar-bottom {
+    padding: 28px 0 0;
+  }
+
+  .dashboard-content {
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
+  }
+
+  .dashboard-content-inner {
+    padding: 30px 20px 42px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 420px) {
+  .dashboard-sidebar {
+    padding: 22px 16px 18px;
+  }
+
+  .dashboard-content-inner {
+    padding: 26px 16px 36px;
+  }
+
+  .dashboard-page {
+    gap: 22px;
+  }
+
+  .dashboard-page-header h1 {
+    font-size: 1.7rem;
   }
 }
